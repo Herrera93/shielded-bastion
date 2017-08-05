@@ -1,0 +1,87 @@
+.login-container, .form-container {
+    min-height: 100vh;
+}
+
+.form-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  background: #fff;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.form {
+  -webkit-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 24px 24px 36px;
+}
+
+@media (min-width: 601px) {
+  .login-container, .form-container {
+      min-height: 0vh;
+  }
+
+  .login-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .login-container::before, .login-container::after {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    content: '';
+    display: block;
+    height: 24px;
+  }
+
+  .login-container::before{
+    min-height: 30px;
+  }
+
+  .login-container::after{
+    min-height: 64.8px;
+  }
+
+  .form-container {
+    min-height: 0;
+    width: 450px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .form {
+    height: auto;
+    min-height: 200px;
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 450px){
+  .form {
+    padding: 48px 40px 36px;
+  }
+}

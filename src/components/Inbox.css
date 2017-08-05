@@ -1,0 +1,89 @@
+.searchBar {
+  margin: 10px;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.inbox {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+
+  min-height: 50vh;
+}
+
+.inbox-content {
+  width: 100%;
+}
+
+
+
+@media (min-width: 601px) {
+  .inbox-container{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .inbox-container::before, .inbox-container::after {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    content: '';
+    display: block;
+    height: 24px;
+  }
+
+  .inbox-container::before{
+    min-height: 30px;
+  }
+
+  .inbox-container::after{
+    min-height: 64.8px;
+  }
+
+  .searchBar {
+    min-height: 0;
+    width: 90%;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .inbox {
+    width: 90%;
+  }
+}

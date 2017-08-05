@@ -1,0 +1,40 @@
+.compose-form {
+  padding: 10px;
+}
+
+@media (min-width: 601px) {
+  .compose-container{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .compose-container::before, .compose-container::after {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    content: '';
+    display: block;
+    height: 24px;
+  }
+
+  .compose-container::before{
+    min-height: 30px;
+  }
+
+  .compose-container::after{
+    min-height: 64.8px;
+  }
+
+  .compose-form {
+    width: 90%;
+  }
+}
