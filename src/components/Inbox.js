@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   firebaseConnect,
-  pathToJS} from 'react-redux-firebase'
+  pathToJS,
+dataToJS} from 'react-redux-firebase'
 import { Redirect } from 'react-router'
 
 import './Inbox.css'
@@ -23,6 +24,8 @@ import {List, ListItem} from 'material-ui/List';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton'
 
 var MediaQuery = require('react-responsive');
 
@@ -44,6 +47,10 @@ class Inbox extends Component {
     }
   }
 
+  componentDidMount(){
+    this.setState({to: 'alex.herrera@email.com', message: 'test', subject: 'test'});
+  }
+
   handleEmailClick(event, id){
     event.preventDefault();
     console.log(id);
@@ -56,8 +63,47 @@ class Inbox extends Component {
 
   handleDrawer = () => this.setState({open: !this.state.open});
 
+  emailSubmit(event){
+    console.log(this.state);
+    let {to, subject, message, uuid} = this.state;
+
+    let email = {
+      date: new Date().toISOString(),
+      from: {
+        name: this.props.profile.name,
+        email: this.props.profile.email
+      },
+      isDeleted: false,
+      isImportant: false,
+      message: message,
+      subject: subject,
+      to: to
+    }
+
+    var sent_uuid = '';
+    _.forOwn(this.props.users, (val, key) => {
+      if(val.email === to){
+        sent_uuid = key;
+      }
+    })
+
+    this.props.firebase.push('/users/' + sent_uuid + '/receive_emails', email)
+    .then(x => {
+      this.props.firebase.push('/users/' + uuid + '/sent_emails', email)
+      .then(uuid => {
+        this.setState({
+          to: '',
+          subject: '',
+          message: ''
+        })
+      })
+    }).catch(error => {
+      console.error(error.message);
+    })
+  }
+
   render() {
-    let { uuid, fireRedirect, email, gotoCompose, isSelected} = this.state;
+    let { uuid, fireRedirect, email, gotoCompose, isSelected, to, subject, message} = this.state;
 
     if(!uuid){
       return (
@@ -104,6 +150,19 @@ class Inbox extends Component {
     });
 
     const navString = this.startAt + "-" + listItems.length + " of " + listItems.length;
+
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onTouchTap={this.handleDrawer}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        onTouchTap={(event) => this.emailSubmit(event)}
+      />,
+    ];
 
     return (
       <MuiThemeProvider>
@@ -184,10 +243,12 @@ class Inbox extends Component {
                   <RaisedButton
                     backgroundColor="#ff6c60"
                     label="Compose"
-                    labelColor="white"
-                    labelStyle={{padding: '0px'}}
+                    labelColor="#ffffff"
+                    labelStyle={{lineHeight: '60px'}}
+                    overlayStyle={{height: '100%'}}
                     className="compose-button"
-                    style={{backgroundColor: "#ff6c60"}}
+                    style={{backgroundColor: "#ff6c60", height: '60px'}}
+                    onTouchTap={this.handleDrawer}
                   />
                 </div>
                 <Divider style={{backgroundColor: 'rgba(0,0,0,.12)'}}/>
@@ -276,6 +337,36 @@ class Inbox extends Component {
                 </Paper>
               </div>
             </div>
+            <Dialog
+              title="Send Email"
+              actions={actions}
+              modal={true}
+              open={this.state.open}
+            >
+              <TextField
+                type="email"
+                floatingLabelText="To (email)"
+                fullWidth={true}
+                value={to}
+                onChange = {(event,newValue) => this.setState({to:newValue})}
+              />
+              <br/>
+              <TextField
+                floatingLabelText="Subject"
+                fullWidth={true}
+                value={subject}
+                onChange = {(event,newValue) => this.setState({subject:newValue})}
+              />
+              <br/>
+              <TextField
+                 floatingLabelText="Message"
+                 fullWidth={true}
+                 multiLine={true}
+                 rows={15}
+                 value={message}
+                 onChange = {(event,newValue) => this.setState({message:newValue})}
+               />
+            </Dialog>
           </MediaQuery>
 
            {fireRedirect && (
@@ -296,10 +387,13 @@ class Inbox extends Component {
   }
 }
 
-const fbWrapped = firebaseConnect()(Inbox);
+const fbWrapped = firebaseConnect([
+  '/users'
+])(Inbox);
 
 export default connect(
   ({firebase}) => ({
+    users: dataToJS(firebase, 'users'),
     profile: pathToJS(firebase, 'profile')
   })
 )(fbWrapped);
