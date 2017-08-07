@@ -53,6 +53,7 @@ class Inbox extends Component {
 
   handleEmailClick(event, id){
     event.preventDefault();
+
     console.log(this.isMobile);
     this.setState({
       fireRedirect: this.isMobile,
