@@ -122,12 +122,13 @@ class Inbox extends Component {
             primaryText={email.from.name}
             leftCheckbox={
               <div style={{display: 'flex', width: '80px'}}>
-                <Checkbox style={{marginTop: '12px', width: 'auto'}} onClick={(e) => { e.stopPropagation();}} />
+                <Checkbox style={{marginTop: '12px', width: 'auto'}} onClick={(e) => { e.stopPropagation();}} onTouchTap={(e) => { e.stopPropagation();}} />
                 <Checkbox
                   checkedIcon={<FontIcon className="material-icons" style={{color: '#FFD740'}}>star</FontIcon>}
                   uncheckedIcon={<FontIcon className="material-icons">star_border</FontIcon>}
                   style={{marginTop: '12px', width: 'auto'}}
                   onClick={(e) => { e.stopPropagation();}}
+                  onTouchTap={(e) => { e.stopPropagation();}}
                   checked={email.isImportant}
                 />
               </div>
