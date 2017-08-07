@@ -33,10 +33,8 @@
   width: 100%;
 }
 
-
-
-@media (min-width: 601px) {
-  .inbox-container{
+@media (min-device-width: 768px) {
+  .page {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -44,33 +42,23 @@
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
-    -webkit-align-items: center;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
+    height: 100%;
   }
 
-  .inbox-container::before, .inbox-container::after {
-    -webkit-box-flex: 1;
-    box-flex: 1;
-    -webkit-flex-grow: 1;
-    flex-grow: 1;
-    content: '';
-    display: block;
-    height: 24px;
-  }
+  .inbox-container{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 
-  .inbox-container::before{
-    min-height: 30px;
-  }
-
-  .inbox-container::after{
-    min-height: 64.8px;
+    flex: 1;
   }
 
   .searchBar {
-    min-height: 0;
-    width: 90%;
+    height: 60px;
+    margin: 20px;
+    width: 100%;
 
     display: -webkit-box;
     display: -moz-box;
@@ -81,9 +69,114 @@
     flex-direction: row;
     -webkit-align-items: center;
     align-items: center;
+    justify-content: center;
   }
 
   .inbox {
-    width: 90%;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .inbox-content {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+
+    margin: 0px 20px;
+    min-width: 632px;
+  }
+
+  .inbox-menu {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+
+    min-width: 148px;
+    width: 15%;
+  }
+
+  .inbox-menu-header {
+    padding: 20px;
+  }
+
+  .compose-button {
+    width: 100%;
+    min-width: 88px;
+    height: 60px;
+    padding: 12px;
+    background-color: blue;
+  }
+
+  .inbox-emails {
+    width: 100%;
+    height: 100%;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .inbox-email-list {
+    width: 50%;
+    overflow-y: auto;
+  }
+
+  .inbox-email {
+    width: 50%;
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    max-width: 100%;
+    place-content: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+  }
+
+  .message-before-selected {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .inbox-email-paper {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+
+    box-shadow: none!important;
+    border-left: solid 1px rgb(224, 224, 224);
   }
 }

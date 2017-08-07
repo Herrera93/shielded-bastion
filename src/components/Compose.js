@@ -16,7 +16,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
@@ -56,7 +55,7 @@ class Compose extends Component {
 
     var sent_uuid = '';
     _.forOwn(this.props.users, (val, key) => {
-      if(val.email == to){
+      if(val.email === to){
         sent_uuid = key;
       }
     })
