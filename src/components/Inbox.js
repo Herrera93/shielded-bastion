@@ -53,7 +53,7 @@ class Inbox extends Component {
 
   handleEmailClick(event, id){
     event.preventDefault();
-    console.log(id);
+    console.log(this.isMobile);
     this.setState({
       fireRedirect: this.isMobile,
       isSelected: true,
@@ -231,8 +231,18 @@ class Inbox extends Component {
               </Paper>
             </div>
           </MediaQuery>
+          <MediaQuery minDeviceWidth={768}>
+            {(matches) => {
+              if (matches) {
+                this.isMobile = false;
+                return null;
+              } else {
+                this.isMobile = true;
+                return null;
+              }
+            }}
+          </MediaQuery>
           <MediaQuery minDeviceWidth={768} className="page">
-            {this.isMobile = false}
             <AppBar
               title="Inbox"
               iconElementLeft={<div></div>}
